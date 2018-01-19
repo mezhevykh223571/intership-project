@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: $huge) {
+  .container {
+    max-width: $huge-container;
+  }
+}
+
+@media (min-width: $large) and (max-width: 1199px) {
+  .container {
+    max-width: $large-container;
+  }
+}
+
+@media (max-width: $medium) {
+  .container {
+    max-width: $medium-container;
+  }
+}
+
+@media (max-width: $small) {
+  .container {
+    max-width: $small-container;
+  }
+}

@@ -1,0 +1,40 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  line-height: 1.2;
+  color: inherit;
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
+}
+
+h5 {
+  font-size: $h5-font-size;
+}
+
+h6 {
+  font-size: $h6-font-size;
+}
+
+a {
+  color: $red;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: $link-hover-color;
+  text-decoration: underline;
+}
+
+a, button, input, select, textarea {
+  outline: none;
+}

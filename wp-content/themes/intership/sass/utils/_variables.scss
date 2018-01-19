@@ -1,0 +1,43 @@
+// breakpoints
+$small:                                       575px;
+$medium:                                      768px;
+$large:                                       1024px;
+$huge:                                        1200px;
+
+//container breakpoints
+$small-container:                             540px;
+$medium-container:                            750px;
+$large-container:                             992px;
+$huge-container:                              1170px;
+
+//colors
+$red:                                         #df001f;
+$dark-grey:                                   #282828;
+$light-grey:                                  #999999;
+$light-grey1:                                 #9f9999;
+$light-grey2:                                 #ccc;
+$grey:                                        #333;
+$link-hover-color:                            darken($red,15%);
+
+//typography vars
+$base-font-size:                              16px !default;
+
+$base-line-height:                            24px !default;
+
+$base-unit:                                   'em' !default;
+
+$h1-font-size:                                2    * $base-font-size !default;
+$h2-font-size:                                1.5  * $base-font-size !default;
+$h3-font-size:                                1.17 * $base-font-size !default;
+$h4-font-size:                                1    * $base-font-size !default;
+$h5-font-size:                                0.83 * $base-font-size !default;
+$h6-font-size:                                0.67 * $base-font-size !default;
+
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans'), local('DroidSans-Regular'),
+  url(../fonts/droid-sans.woff) format('woff'),
+  url(../fonts/droid-sans.ttf) format('truetype');
+}

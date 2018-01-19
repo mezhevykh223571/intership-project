@@ -1,0 +1,48 @@
+.card {
+  position: relative;
+  max-height: 470px;
+  .card-img {
+    max-height: 470px;
+  }
+  .card-caption {
+    background: $red;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding-left: 26px;
+    p {
+      margin: 0;
+      color: #fff;
+      font-size: 22px;
+      padding-bottom: 20px;
+      &:first-of-type {
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 0;
+      }
+    }
+    .soc-network {
+      display: none;
+      a {
+        color: #fff;
+      }
+      ul {
+        margin-top: -4px;
+        li {
+          display: inline-flex;
+          vertical-align: text-bottom;
+          margin-right: 15px;
+        }
+      }
+      i {
+        margin-right: 8px;
+      }
+    }
+    &:hover {
+      .soc-network {
+        padding-bottom: 18px;
+        display: block;
+      }
+    }
+  }
+}

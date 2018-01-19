@@ -1,0 +1,84 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.site-header {
+  display: flex;
+  background: $red;
+  .menu-nav-container, .brand-logo, .right-col {
+    display: inline-flex;
+    align-items: center;
+    flex: 1 0 26.3%
+  }
+  .main-navigation {
+    display: flex;
+    font-family: "Droid Sans";
+    ul {
+      li {
+        a {
+          padding: 38px 20px 38px;
+          color: #fff;
+          &:active {
+            background: #fff;
+          }
+          &:hover {
+            background: rgba(0, 0, 0, .45);
+          }
+        }
+      }
+    }
+  }
+  .brand-logo {
+    a {
+      height: 76px;
+      img {
+        width: 115px;
+        height: 76px;
+      }
+    }
+  }
+  .soc-sharing {
+    ul {
+      list-style: none;
+      display: flex;
+      align-items: flex-end;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .-purchase-btn-header {
+    color: $red;
+    background: #fff;
+  }
+  a {
+    text-transform: uppercase;
+  }
+}
+
+.facebook:before {
+  content: '';
+  display: inline-block;
+  background: url(../img/fb-ico.png) no-repeat left;
+  width: 12px;
+  height: 23px;
+  margin-bottom: -2px;
+}
+
+.twitter:before {
+  content: '';
+  display: inline-block;
+  background: url(../img/tw-ico.png) no-repeat left;
+  width: 22px;
+  height: 18px;
+  margin-bottom: -2px;
+}
+
+.google-plus:before {
+  content: '';
+  display: inline-block;
+  background: url(../img/g-plus-icon.png) no-repeat left;
+  width: 22px;
+  height: 23px;
+  margin-bottom: -2px;
+}
