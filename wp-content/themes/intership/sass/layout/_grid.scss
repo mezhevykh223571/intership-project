@@ -4,26 +4,26 @@
   margin-left: auto;
 }
 
-@media (min-width: $huge) {
+@media (min-width: $small) {
   .container {
-    max-width: $huge-container;
+    max-width: $small-container;
   }
 }
 
-@media (min-width: $large) and (max-width: 1199px) {
-  .container {
-    max-width: $large-container;
-  }
-}
-
-@media (max-width: $medium) {
+@media (min-width: $medium) {
   .container {
     max-width: $medium-container;
   }
 }
 
-@media (max-width: $small) {
+@media (min-width: $large) {
   .container {
-    max-width: $small-container;
+    max-width: $large-container;
+  }
+}
+
+@media (min-width: $huge) {
+  .container {
+    max-width: $huge-container;
   }
 }

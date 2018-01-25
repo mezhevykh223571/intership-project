@@ -129,6 +129,8 @@ function intership_scripts() {
 
     wp_enqueue_script('jquery-js', get_template_directory_uri() . '/js/jquery-3.2.1.min.js', array(), '20151215', true);
 
+    wp_enqueue_script('devrama-js', 'https://devrama.com/static/devrama-slider/jquery.devrama.slider-0.9.4.js', array(), '20151215', true);
+
 	wp_enqueue_script( 'custom-js', get_template_directory_uri() . '/js/main.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -509,76 +511,75 @@ add_action("customize_register", "sitepoint_customize_register_links");
 /**
  * Our Members
  */
-function custom_init()
-{
-    $args = array(
-        'public' => true,
-        'label' => 'Our Members',
-        'supports' => array('title', 'editor', 'thumbnail')
-    );
-    register_post_type('members', $args);
-}
-
-add_action('init', 'custom_init');
-add_action('add_meta_boxes', 'custom_fields_add_meta_box');
-function custom_fields_add_meta_box()
-{
-    add_meta_box('additional-info', __('Additional info'), 'custom_members_field', 'members', 'normal', 'high');
-}
-
-function custom_members_field($post)
-{
-    $values = get_post_custom($post->ID);
-    $instrument = isset($values['instrument']) ? esc_attr($values['instrument'][0]) : '';
-    $facebook = isset($values['facebook']) ? esc_attr($values['facebook'][0]) : '';
-    $twitter = isset($values['twitter']) ? esc_attr($values['twitter'][0]) : '';
-    $googleplus = isset($values['googleplus']) ? esc_attr($values['googleplus'][0]) : '';
-    $facebookLink = isset($values['facebook-link']) ? esc_attr($values['facebook-link'][0]) : '';
-    $twitterLink = isset($values['twitter-link']) ? esc_attr($values['twitter-link'][0]) : '';
-    $googleplusLink = isset($values['googleplus-link']) ? esc_attr($values['googleplus-link'][0]) : '';
-    echo '<p><input id="instrument" name="instrument" type="text" value="' . $instrument . '"><label for="instrument"> - Instrument</label></p>';
-    echo '<p><input id="facebook-link" name="facebook-link" type="text" value="' . $facebookLink . '"><label for="facebook-link"> - Facebook Link</label></p>';
-    echo '<p><input id="facebook" name="facebook" type="text" value="' . $facebook . '"><label for="facebook"> - Facebook Followers</label></p>';
-    echo '<p><input id="twitter-link" name="twitter-link" type="text" value="' . $twitterLink . '"><label for="twitter-link"> - Twitter Link</label></p>';
-    echo '<p><input id="twitter" name="twitter" type="text" value="' . $twitter . '"><label for="twitter"> - Twitter Followers</label></p>';
-    echo '<p><input id="googleplus-link" name="googleplus-link" type="text" value="' . $googleplusLink . '"><label for="googleplus-link"> - Google+ Link</label></p>';
-    echo '<p><input id="googleplus" name="googleplus" type="text" value="' . $googleplus . '"><label for="googleplus"> - Google+ Followers</label></p>';
-
-}
-
-add_action('save_post', 'custom_members_field_save');
-function custom_members_field_save($post_id)
-{
-    $allowed = 'None';
-    if (isset($_POST['instrument']))
-        update_post_meta($post_id, 'instrument', wp_kses($_POST['instrument'], $allowed));
-    if (isset($_POST['facebook-link']))
-        update_post_meta($post_id, 'facebook-link', wp_kses($_POST['facebook-link'], $allowed));
-    if (isset($_POST['twitter-link']))
-        update_post_meta($post_id, 'twitter-link', wp_kses($_POST['twitter-link'], $allowed));
-    if (isset($_POST['googleplus-link']))
-        update_post_meta($post_id, 'googleplus-link', wp_kses($_POST['googleplus-link'], $allowed));
-    if (isset($_POST['facebook']))
-        update_post_meta($post_id, 'facebook', wp_kses($_POST['facebook'], $allowed));
-    if (isset($_POST['twitter']))
-        update_post_meta($post_id, 'twitter', wp_kses($_POST['twitter'], $allowed));
-    if (isset($_POST['googleplus']))
-        update_post_meta($post_id, 'googleplus', wp_kses($_POST['googleplus'], $allowed));
-}
-
-add_action('init', 'create_members_tax');
-function create_members_tax()
-{
-    register_taxonomy(
-        'members_category',
-        'members',
-        array(
-            'label' => __('Category'),
-            'rewrite' => array('slug' => 'category'),
-            'hierarchical' => true,
-        )
-    );
-}
+//function custom_init()
+//{
+//    $args = array(
+//        'public' => true,
+//        'label' => 'Our Members',
+//        'supports' => array('title', 'editor', 'thumbnail')
+//    );
+//    register_post_type('featured_post', $args);
+//}
+//
+//add_action('init', 'custom_init');
+//add_action('add_meta_boxes', 'featured_post_add_meta_box');
+//function featured_post_add_meta_box()
+//{
+//    add_meta_box('additional-info', __('Additional info'), 'featured_post_field', 'featured_post', 'normal', 'high');
+//}
+//
+//function featured_post_field($post)
+//{
+//    $values = get_post_custom($post->ID);
+//    $instrument = isset($values['instrument']) ? esc_attr($values['instrument'][0]) : '';
+//    $facebook = isset($values['facebook']) ? esc_attr($values['facebook'][0]) : '';
+//    $twitter = isset($values['twitter']) ? esc_attr($values['twitter'][0]) : '';
+//    $googleplus = isset($values['googleplus']) ? esc_attr($values['googleplus'][0]) : '';
+//    $facebookLink = isset($values['facebook-link']) ? esc_attr($values['facebook-link'][0]) : '';
+//    $twitterLink = isset($values['twitter-link']) ? esc_attr($values['twitter-link'][0]) : '';
+//    $googleplusLink = isset($values['googleplus-link']) ? esc_attr($values['googleplus-link'][0]) : '';
+//    echo '<p><input id="instrument" name="instrument" type="text" value="' . $instrument . '"><label for="instrument"> - Instrument</label></p>';
+//    echo '<p><input id="facebook-link" name="facebook-link" type="text" value="' . $facebookLink . '"><label for="facebook-link"> - Facebook Link</label></p>';
+//    echo '<p><input id="facebook" name="facebook" type="text" value="' . $facebook . '"><label for="facebook"> - Facebook Followers</label></p>';
+//    echo '<p><input id="twitter-link" name="twitter-link" type="text" value="' . $twitterLink . '"><label for="twitter-link"> - Twitter Link</label></p>';
+//    echo '<p><input id="twitter" name="twitter" type="text" value="' . $twitter . '"><label for="twitter"> - Twitter Followers</label></p>';
+//    echo '<p><input id="googleplus-link" name="googleplus-link" type="text" value="' . $googleplusLink . '"><label for="googleplus-link"> - Google+ Link</label></p>';
+//    echo '<p><input id="googleplus" name="googleplus" type="text" value="' . $googleplus . '"><label for="googleplus"> - Google+ Followers</label></p>';
+//}
+//
+//add_action('save_post', 'featured_post_field_save');
+//function featured_post_field_save($post_id)
+//{
+//    $allowed = 'None';
+//    if (isset($_POST['instrument']))
+//        update_post_meta($post_id, 'instrument', wp_kses($_POST['instrument'], $allowed));
+//    if (isset($_POST['facebook-link']))
+//        update_post_meta($post_id, 'facebook-link', wp_kses($_POST['facebook-link'], $allowed));
+//    if (isset($_POST['twitter-link']))
+//        update_post_meta($post_id, 'twitter-link', wp_kses($_POST['twitter-link'], $allowed));
+//    if (isset($_POST['googleplus-link']))
+//        update_post_meta($post_id, 'googleplus-link', wp_kses($_POST['googleplus-link'], $allowed));
+//    if (isset($_POST['facebook']))
+//        update_post_meta($post_id, 'facebook', wp_kses($_POST['facebook'], $allowed));
+//    if (isset($_POST['twitter']))
+//        update_post_meta($post_id, 'twitter', wp_kses($_POST['twitter'], $allowed));
+//    if (isset($_POST['googleplus']))
+//        update_post_meta($post_id, 'googleplus', wp_kses($_POST['googleplus'], $allowed));
+//}
+//
+//add_action('init', 'featured_post_tax');
+//function featured_post_tax()
+//{
+//    register_taxonomy(
+//        'featured_post_category',
+//        'featured_post',
+//        array(
+//            'label' => __('Category'),
+//            'rewrite' => array('slug' => 'category'),
+//            'hierarchical' => true,
+//        )
+//    );
+//}
 
 function get_link_slug($slug, $type = 'custom_init')
 {
@@ -712,6 +713,85 @@ function create_members_tax_video()
 }
 
 function get_link_slug_video($slug, $type = 'custom_init')
+{
+    $post = get_page_by_path($slug, OBJECT, $type);
+    return get_permalink($post->ID);
+}
+
+/*
+ * Active current menu button
+ */
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
+function special_nav_class ($classes, $item) {
+    if (in_array('current-menu-item', $classes) ){
+        $classes[] = 'active ';
+    }
+    return $classes;
+}
+
+/*
+ * Slider
+ */
+function custom_init_slider()
+{
+    $args = array(
+        'public' => true,
+        'label' => 'Slider',
+        'supports' => array('title', 'thumbnail')
+    );
+    register_post_type('slider', $args);
+}
+
+add_action('init', 'custom_init_slider');
+add_action('add_meta_boxes', 'custom_fields_add_meta_box_slider');
+function custom_fields_add_meta_box_slider()
+{
+    add_meta_box('additional-info', __('Slider info'), 'custom_members_field_slider', 'slider', 'normal', 'high');
+}
+
+function custom_members_field_slider($post)
+{
+    $values = get_post_custom($post->ID);
+    $header = isset($values['header']) ? esc_attr($values['header'][0]) : '';
+    $caption = isset($values['caption']) ? esc_attr($values['caption'][0]) : '';
+    $btnLink = isset($values['btn-link']) ? esc_attr($values['btn-link'][0]) : '';
+    $btnText = isset($values['btn-text']) ? esc_attr($values['btn-text'][0]) : '';
+    echo '<p><input id="header" name="header" type="text" value="' . $header . '"><label for="header"> - Header</label></p>';
+    echo '<p><input id="caption" name="caption" type="text" value="' . $caption . '"><label for="caption"> - Caption</label></p>';
+    echo '<p><input id="btn-link" name="btn-link" type="text" value="' . $btnLink . '"><label for="btn-link"> - Button link</label></p>';
+    echo '<p><input id="btn-text" name="btn-text" type="text" value="' . $btnText . '"><label for="btn-text"> - Button text</label></p>';
+}
+
+add_action('save_post', 'custom_members_field_save_slider');
+function custom_members_field_save_slider($post_id)
+{
+    $allowed = 'None';
+    if (isset($_POST['header']))
+        update_post_meta($post_id, 'header', wp_kses($_POST['header'], $allowed));
+    if (isset($_POST['caption']))
+        update_post_meta($post_id, 'caption', wp_kses($_POST['caption'], $allowed));
+    if (isset($_POST['btn-link']))
+        update_post_meta($post_id, 'btn-link', wp_kses($_POST['btn-link'], $allowed));
+    if (isset($_POST['btn-text']))
+        update_post_meta($post_id, 'btn-text', wp_kses($_POST['btn-text'], $allowed));
+}
+
+add_action('init', 'create_members_tax_slider');
+function create_members_tax_slider()
+{
+    register_taxonomy(
+        'slider_category',
+        'slider',
+        array(
+            'label' => __('Category'),
+            'rewrite' => array('slug' => 'category'),
+            'hierarchical' => true,
+        )
+    );
+}
+
+function get_link_slug_slider($slug, $type = 'custom_init')
 {
     $post = get_page_by_path($slug, OBJECT, $type);
     return get_permalink($post->ID);

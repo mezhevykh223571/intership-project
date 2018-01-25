@@ -16,14 +16,28 @@ get_header(); ?>
 
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
+            <div class="page-thumb">
+                <?php the_post_thumbnail( 'category-thumb' ); ?>
+            </div>
+            <div class="caption center-title">
+                <h3><?php the_title() ?></h3>
+            </div>
             <div class="container">
-                <?php
-                $pages = get_pages();
-                foreach ( $pages as $page ) {
-                    $option = '<a href="' . get_page_link( $page->ID ) . '"' . '>' . $page->post_title; '</a>';
-                    echo $option;
-                }
-                ?>
+
+                <div class="all-pages">
+                    <ol>
+                    <?php
+                    $args = array(
+                      'exclude' => '20'
+                    );
+                    $pages = get_pages( $args );
+                    foreach ( $pages as $page ) {
+                        $option = '<li><a href="' . get_page_link( $page->ID ) . '">' . $page->post_title; '</a></li>';
+                        echo $option;
+                    }
+                    ?>
+                    </ol>
+                </div>
             </div>
         </main><!-- #main -->
     </div><!-- #primary -->

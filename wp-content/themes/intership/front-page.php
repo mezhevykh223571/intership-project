@@ -16,15 +16,49 @@ get_header(); ?>
 
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
-
-            <section class="top-section">
-                <div class="top-text">
-                    <h3>let's rock</h3>
-                    <p>With Cantus</p>
-                    <a href="#">discover more</a>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 78%"></div>
+            <section>
+                <?php
+                $args = array(
+                    'post_type' => 'slider',
+                    'orderby' => 'date',
+                    'order' => 'DESC',
+                    'paged' => $paged
+                );
+                // The Query
+                $the_query = new WP_Query($args);
+                // The Loop
+                if ($the_query->have_posts()) {
+                    while ($the_query->have_posts()) {
+                        $the_query->the_post();
+                        $post_id = get_the_ID();
+                        ?>
+                        <div id="slider">
+                            <div class="wrap">
+                                <div class="panel">
+                                    <div class="top-section">
+                                        <?php the_post_thumbnail() ?>
+                                        <div class="top-text">
+                                            <h3><?php echo get_post_meta($post_id, 'header', true); ?></h3>
+                                            <p><?php echo get_post_meta($post_id, 'caption', true); ?></p>
+                                            <a href="<?php echo get_post_meta($post_id, 'btn-link', true); ?>"><?php echo get_post_meta($post_id, 'btn-text', true); ?></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }
+                } else {
+                    ?>
+                    <div class="progress -top-section-progress" style="display: none">
+                        <div class="progress-bar">
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <div class="progress -top-section-progress">
+                    <div class="progress-bar">
+                    </div>
                 </div>
             </section>
 
@@ -43,53 +77,9 @@ get_header(); ?>
                     </div>
 
                     <div class="card-section">
-                        <?php
-                        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-                        $args = array(
-                            'post_type' => 'members',
-                            'posts_per_page' => '3',
-                            'orderby' => 'date',
-                            'order' => 'DESC',
-                            'paged' => $paged
-                        );
-                        // The Query
-                        $the_query = new WP_Query($args);
-                        // The Loop
-                        if ($the_query->have_posts()) {
-                            while ($the_query->have_posts()) {
-                                $the_query->the_post();
-                                $post_id = get_the_ID();
-                                ?>
-                                <div class="card">
-                                    <div class="card-img">
-                                        <?php the_post_thumbnail(); ?>
-                                    </div>
-                                    <div class="card-caption">
-                                        <p><?php echo get_the_title($post_id) ?></p>
-                                        <p><?php echo get_post_meta($post_id, 'instrument', true); ?></p>
-                                        <div class="soc-network">
-                                            <ul>
-                                                <li><a href="#"><i
-                                                                class="facebook"></i><?php echo get_post_meta($post_id, 'facebook', true); ?>
-                                                    </a></li>
-                                                <li><a href="#"><i
-                                                                class="twitter"></i><?php echo get_post_meta($post_id, 'twitter', true); ?>
-                                                    </a></li>
-                                                <li><a href="#"><i
-                                                                class="google-plus"></i><?php echo get_post_meta($post_id, 'googleplus', true); ?>
-                                                    </a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
 
-                            <?php }
-                        } else {
-                            // no posts found
-                        }
-                        ?>
+                        <?php echo do_shortcode('[featured-content design="design-5" limit="3"]'); ?>
                     </div>
-
                 </div>
             </section>
 
@@ -131,70 +121,74 @@ get_header(); ?>
                         $the_query = new WP_Query($args);
                         // The Loop
                         if ($the_query->have_posts()) {
-                            while ($the_query->have_posts()) {
-                                $the_query->the_post();
-                                $post_id = get_the_ID();
-                                ?>
-                                <div class="flex-wrap">
-                                    <div class="front-left-col">
-                                        <div class="event-block">
-                                            <div class="event-img">
-                                                <div class="event-img-wrapper">
-                                                    <?php the_post_thumbnail(); ?>
-                                                </div>
-                                                <div class="event-imd-date">
-                                                    <?php echo get_post_meta($post_id, 'event-day', true); ?>
-                                                </div>
-                                            </div>
-                                            <div class="event-ticket">
-                                                <h3><?php echo get_the_title($post_id) ?></h3>
-                                                <p><span>Location</span>
-                                                    : <?php echo get_post_meta($post_id, 'location', true); ?></p>
-                                                <p><span>Date</span>
-                                                    : <?php echo get_post_meta($post_id, 'date', true); ?></p>
-                                                <p><span>Time</span>
-                                                    : <?php echo get_post_meta($post_id, 'time', true); ?></p>
-                                                <p><span>Price</span> :
-                                                    $<?php echo get_post_meta($post_id, 'price', true); ?></p>
-                                                <?php }
-                                                } else {
-                                                    // no posts found
-                                                }
-                                                ?>
-                                                <a href="<?php echo get_post_meta($post_id, 'btn-link', true); ?>" class="purchase-btn -purchase-btn-ticket">purchase
-                                                    Ticket</a>
-                                            </div>
+                        while ($the_query->have_posts()) {
+                        $the_query->the_post();
+                        $post_id = get_the_ID();
+                        ?>
+                        <div class="flex-wrap">
+                            <div class="front-left-col">
+                                <div class="event-block">
+                                    <div class="event-img">
+                                        <div class="event-img-wrapper">
+                                            <?php the_post_thumbnail(); ?>
+                                        </div>
+                                        <div class="event-imd-date">
+                                            <?php echo get_post_meta($post_id, 'event-day', true); ?>
                                         </div>
                                     </div>
-
-                                    <div class="front-right-col">
-                                        <div class="latest-video-wrapper">
-                                            <?php
-                                            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-                                            $args = array(
-                                                'post_type' => 'video',
-                                                'posts_per_page' => '1',
-                                                'orderby' => 'date',
-                                                'order' => 'DESC',
-                                                'paged' => $paged
-                                            );
-                                            // The Query
-                                            $the_query = new WP_Query($args);
-                                            // The Loop
-                                            if ($the_query->have_posts()) {
-                                                while ($the_query->have_posts()) {
-                                                    $the_query->the_post();
-                                                    $post_id = get_the_ID();
-                                                    ?>
-                                                    <iframe width="560" height="315" src="<?php echo get_post_meta($post_id, 'video', true); ?>?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                <?php }
-                                            } else {
-                                                // no posts found
-                                            }
-                                            ?>
-                                        </div>
+                                    <div class="event-ticket">
+                                        <h3><?php echo get_the_title($post_id) ?></h3>
+                                        <p><span>Location</span>
+                                            : <?php echo get_post_meta($post_id, 'location', true); ?></p>
+                                        <p><span>Date</span>
+                                            : <?php echo get_post_meta($post_id, 'date', true); ?></p>
+                                        <p><span>Time</span>
+                                            : <?php echo get_post_meta($post_id, 'time', true); ?></p>
+                                        <p><span>Price</span> :
+                                            $<?php echo get_post_meta($post_id, 'price', true); ?></p>
+                                        <?php }
+                                        } else {
+                                            // no posts found
+                                        }
+                                        ?>
+                                        <a href="<?php echo get_post_meta($post_id, 'btn-link', true); ?>"
+                                           class="purchase-btn -purchase-btn-ticket">purchase
+                                            Ticket</a>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="front-right-col">
+                                <div class="latest-video-wrapper">
+                                    <?php
+                                    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                                    $args = array(
+                                        'post_type' => 'video',
+                                        'posts_per_page' => '1',
+                                        'orderby' => 'date',
+                                        'order' => 'DESC',
+                                        'paged' => $paged
+                                    );
+                                    // The Query
+                                    $the_query = new WP_Query($args);
+                                    // The Loop
+                                    if ($the_query->have_posts()) {
+                                        while ($the_query->have_posts()) {
+                                            $the_query->the_post();
+                                            $post_id = get_the_ID();
+                                            ?>
+                                            <iframe width="560" height="315"
+                                                    src="<?php echo get_post_meta($post_id, 'video', true); ?>?rel=0&amp;controls=0&amp;showinfo=0"
+                                                    frameborder="0" allow="autoplay; encrypted-media"
+                                                    allowfullscreen></iframe>
+                                        <?php }
+                                    } else {
+                                        // no posts found
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
                         <div class="progress -progress-event">
                             <div class="progress-bar" style="margin-left: 22px; width: 20.35%;"></div>
                         </div>
@@ -237,35 +231,6 @@ get_header(); ?>
                         <div class="flex-wrap">
                             <div class="front-left-col">
                                 <div class="sc-media-player-wrapper">
-                                    <!--                                    <div class="artist-img">-->
-                                    <!--                                        <img src="-->
-                                    <?php //echo get_stylesheet_directory_uri() . '/img/home/album.png' ?><!--">-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="sc-media-player">-->
-                                    <!--                                        <div class="play-wrap">-->
-                                    <!--                                            <div class="col-wrap">-->
-                                    <!--                                                <div class="play-btn-wrap">-->
-                                    <!--                                                    <img src="-->
-                                    <?php //echo get_stylesheet_directory_uri() . '/img/play-icon.png' ?><!--">-->
-                                    <!--                                                </div>-->
-                                    <!--                                                <div class="artist-info">-->
-                                    <!--                                                    <span class="artist-name">nineinchnails</span>-->
-                                    <!--                                                    <span class="artist-song">1. My heart is dancing</span>-->
-                                    <!--                                                </div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                            <div class="col-wrap">-->
-                                    <!--                                                <span class="song-lenght">10 minths</span>-->
-                                    <!--                                                <span class="song-genre">#industrual</span>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                        <div class="scrub-wrap">-->
-                                    <!--                                            <img src="-->
-                                    <?php //echo get_stylesheet_directory_uri() . '/img/scrub.png' ?><!--">-->
-                                    <!--                                        </div>-->
-                                    <!--                                        <div class="btns-wrap">-->
-                                    <!---->
-                                    <!--                                        </div>-->
-                                    <!--                                    </div>-->
                                     <iframe width="770" height="166" scrolling="no" frameborder="no" allow="autoplay"
                                             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/325272566&amp;color=%23ff5500&amp;hide_related=false&amp;show_comments=true&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false"></iframe>
                                 </div>

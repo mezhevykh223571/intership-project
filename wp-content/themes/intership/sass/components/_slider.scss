@@ -1,0 +1,19 @@
+#slider {
+  position: relative;
+  .panel {
+    position: absolute;
+    display: none;
+    width: 100%;
+    &:first-child {
+      display: block;
+    }
+  }
+  .panel-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    &:first-child {
+      display: block;
+    }
+  }
+}

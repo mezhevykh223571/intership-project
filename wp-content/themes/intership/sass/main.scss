@@ -6,10 +6,13 @@
 @import "components/progressbar";
 @import "components/card";
 @import "components/buttons";
+@import "components/slider";
 
 @import 'layout/grid';
 @import 'layout/header';
 @import 'layout/footer';
 
-@import 'pages/home';
+@import "pages/home";
 @import "pages/single";
+@import "pages/pages";
+@import "pages/gallery";

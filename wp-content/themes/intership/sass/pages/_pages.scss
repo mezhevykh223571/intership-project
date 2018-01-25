@@ -1,0 +1,28 @@
+.page-thumb {
+  max-height: 470px;
+}
+.center-title {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.content-page-members {
+  display: flex;
+  justify-content: space-between;
+}
+
+.all-pages {
+  a {
+    color: $grey;
+    text-decoration: underline !important;
+    &:hover {
+      color: $link-hover-color;
+    }
+  }
+}
+
+.go-post {
+  color: $red !important;
+}

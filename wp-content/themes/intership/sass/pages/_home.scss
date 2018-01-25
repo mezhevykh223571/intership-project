@@ -8,10 +8,11 @@ h3, p {
 }
 
 .top-section {
-  background: url(../img/home/bg-img.png) no-repeat center/cover;
   text-align: center;
+  padding-bottom: 140px;
   .top-text {
     padding-top: 182px;
+    position: relative;
   }
   h3, a {
     text-transform: uppercase;
@@ -35,12 +36,19 @@ h3, p {
     width: 200px;
     margin: 0 auto;
     text-decoration: none;
-    margin-bottom: 174px;
+  }
+  img {
+    position: absolute;
+    width: 100%;
+    max-height: 700px;
+    display: flex;
+    margin: 0;
+    padding: 0;
   }
 }
 
 .intro {
-  margin-top: 90px;
+  margin-top: 790px;
   .card-section {
     display: flex;
     justify-content: space-between;
@@ -309,4 +317,23 @@ iframe {
       }
     }
   }
+}
+
+@media (max-width: 1199px) {
+  .site-header {
+    .main-navigation {
+      ul {
+        li {
+          a {
+            padding: 38px 10px 38px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.-top-section-progress {
+  top: 700px;
 }

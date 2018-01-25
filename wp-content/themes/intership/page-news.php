@@ -16,19 +16,25 @@ get_header(); ?>
 
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
+            <div class="page-thumb">
+                <?php the_post_thumbnail( 'category-thumb' ); ?>
+            </div>
+            <div class="caption center-title">
+                <h3><?php the_title() ?></h3>
+            </div>
             <div class="container">
 
                 <?php
-                global $post;
-                $args = array( 'posts_per_page' => 3 );
-                $lastposts = get_posts( $args );
-                foreach ( $lastposts as $post ) :
-                    setup_postdata( $post ); ?>
+                $post;
+                $lastposts = get_posts($args);
+                foreach ($lastposts as $post) :
+                    setup_postdata($post); ?>
                     <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                     <?php
-                    $tex_content = get_the_content();
-                    echo mb_strimwidth($tex_content, 0, 100, '...');
+                    $text_content = get_the_content();
+                    echo mb_strimwidth($text_content, 0, 180, '...');
                     ?>
+                    <p><a href="<?php the_permalink(); ?>" class="go-post">Go to the post</a></p>
                 <?php endforeach;
                 wp_reset_postdata(); ?>
 

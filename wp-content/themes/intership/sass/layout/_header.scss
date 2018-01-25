@@ -9,7 +9,12 @@ ul {
   .menu-nav-container, .brand-logo, .right-col {
     display: inline-flex;
     align-items: center;
-    flex: 1 0 26.3%
+  }
+  .right-col {
+    flex: 1 0 28.4%;
+  }
+  .brand-logo {
+    flex: 1 0 23%;
   }
   .main-navigation {
     display: flex;
@@ -45,6 +50,14 @@ ul {
       align-items: flex-end;
       margin: 0;
       padding: 0;
+      li {
+        margin-right: 43px;
+      }
+    }
+    .facebook, .twitter, .google-plus {
+      &:before {
+        margin-right: 9px;
+      }
     }
   }
   .-purchase-btn-header {
@@ -81,4 +94,77 @@ ul {
   width: 22px;
   height: 23px;
   margin-bottom: -2px;
+}
+
+.menu-toggle {
+  padding-left: 15px;
+  border: none;
+  background: transparent;
+  margin: 60px auto 40px;
+  position: relative;
+  height: 30px;
+  width: 50px;
+
+  &:before,
+  &:after {
+    background: #fff;
+    backface-visibility: hidden;
+    content: "";
+    height: 2px;
+    left: 0;
+    transition: 0.75s;
+    width: 50px;
+  }
+
+  &:before {
+    box-shadow: #fff 0 14px 0 0;
+    position: absolute;
+    top: 0;
+  }
+
+  &:after {
+    position: absolute;
+    top: calc(100% - 2px);
+  }
+
+  &:active {
+
+    &:before {
+      box-shadow: transparent 0 0 0 0;
+      top: 50%;
+      transform: rotate(225deg);
+    }
+
+    &:after {
+      top: 50%;
+      transform: rotate(315deg);
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .site-header {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .main-navigation {
+    li {
+      float: none;
+    }
+  }
+}
+
+.active {
+  position: relative;
+  &:after {
+    border-bottom: 0.125em solid rgba(255, 255, 255, .5);
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 48%;
+    max-width: 76px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

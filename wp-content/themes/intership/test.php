@@ -1,28 +1,39 @@
-<div class="flex-wrap">
-    <div class="front-left-col">
-        <div class="event-block">
-            <div class="event-img">
-                <div class="event-img-wrapper">
-
+<section>
+    <?php
+    $args = array(
+        'post_type' => 'slider',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'paged' => $paged
+    );
+    // The Query
+    $the_query = new WP_Query($args);
+    // The Loop
+    if ($the_query->have_posts()) {
+    while ($the_query->have_posts()) {
+    $the_query->the_post();
+    $post_id = get_the_ID();
+    ?>
+    <div id="slider">
+        <div class="wrap">
+            <div class="panel">
+                <div class="top-section">
+                    <div class="top-text">
+                        <h3><?php echo get_post_meta($post_id, 'header', true); ?></h3>
+                        <p><?php echo get_post_meta($post_id, 'caption', true); ?></p>
+                        <a href="<?php echo get_post_meta($post_id, 'btn-link', true); ?>"><?php echo get_post_meta($post_id, 'btn-text', true); ?></a>
+                    </div>
                 </div>
-                <div class="event-imd-date">
-                    <?php echo get_post_meta($post_id, 'event-day', true); ?>
-                </div>
-            </div>
-            <div class="event-ticket">
-                <h3><?php echo get_the_title($post_id) ?></h3>
-                <p><span>Location</span> : <?php echo get_post_meta($post_id, 'lcoation', true); ?></p>
-                <p><span>Date</span> : <?php echo get_post_meta($post_id, 'date', true); ?></p>
-                <p><span>Time</span> : <?php echo get_post_meta($post_id, 'time', true); ?></p>
-                <p><span>Price</span> : $<?php echo get_post_meta($post_id, 'price', true); ?></p>
-                <a href="#" class="purchase-btn -purchase-btn-ticket">purchase Ticket</a>
             </div>
         </div>
     </div>
-
-    <div class="front-right-col">
-        <div class="latest-video-wrapper">
-            <img src="<?php echo get_stylesheet_directory_uri() . '/img/home/bg80nxtthy.png' ?>">
+    <div class="progress">
+        <div class="progress-bar">
         </div>
     </div>
-</div>
+</section>
+<?php }
+} else {
+    // no posts found
+}
+?>
